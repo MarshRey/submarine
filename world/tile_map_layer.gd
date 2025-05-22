@@ -33,6 +33,7 @@ extends TileMapLayer
 @export var vertical_bias_up   : int   = 30          # ↑ % (0-100)
 @export var vertical_bias_dn   : int   = 30          # ↓ %
 @export var main_smooth_steps  : int   = 4           # cellular passes
+@export var protected_floor : Dictionary = {}   	 # key = y*width + x
 
 @export_group("Branches")
 @export var reconnect_branches : int   = 2           # optional paths
@@ -88,6 +89,12 @@ func _generate_level() -> void:
 	_carve_branches(deadend_branches, true)
 	for _i in main_smooth_steps:
 		_cellular_step()
+	
+	_dig_rough_cavern(_start_center(), 20)       # main blob
+	#_dig(_start_center().x, _start_center().y, 21)   # thin ring (radius+1)
+	# same for end cavern:
+	_dig_rough_cavern(_end_center(), 20)
+	#_dig(_end_center().x, _end_center().y, 21)
 
 	_dig_rough_cavern(_start_center(), 20)
 	_dig_rough_cavern(_end_center(),   20)
@@ -147,7 +154,10 @@ func _dig_rough_cavern(c:Vector2i, radius:int) -> void:
 	for y in range(-radius, radius+1):
 		for x in range(-radius, radius+1):
 			if Vector2(x,y).length() <= radius and rng.randf() > 0.18:
-				_dig(c.x + x, c.y + y, 0)
+				var gx := c.x + x
+				var gy := c.y + y
+				_dig(gx, gy, 0)
+				protected_floor[gy * width_cells + gx] = true   # <─ mark
 
 func _dig(cx:int, cy:int, r:int) -> void:
 	for yy in range(cy-r, cy+r+1):
@@ -160,12 +170,15 @@ func _cellular_step() -> void:
 	var newg := grid.duplicate()
 	for y in range(height_cells):
 		for x in range(width_cells):
-			var walls := _count_wall_neigh(x,y)
-			var idx := y*width_cells+x
-			if walls >= 5:
-				newg[idx] = 0     # wall
-			else:
-				newg[idx] = 1     # floor
+			var idx := y * width_cells + x
+
+			# keep protected cavern cells as floor
+			if protected_floor.has(idx):
+				newg[idx] = 1
+				continue
+
+			var walls := _count_wall_neigh(x, y)
+			newg[idx] = 0 if walls >= 5 else 1    # or use if/else version
 	grid = newg
 
 func _count_wall_neigh(x:int,y:int) -> int:
