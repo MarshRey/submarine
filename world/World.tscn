@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://beaeimtgeiu8h"]
+
+[ext_resource type="Script" uid="uid://dk3q04mmu3mgl" path="res://world/world.gd" id="1_jeodi"]
+[ext_resource type="Script" uid="uid://csjdcp23lstuv" path="res://world/tile_map_layer.gd" id="2_1tnoa"]
+[ext_resource type="TileSet" uid="uid://b0gr0cld6p6bq" path="res://world/new_tile_set.tres" id="2_qcaji"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_jeodi")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+position = Vector2(-4, 0)
+tile_set = ExtResource("2_qcaji")
+script = ExtResource("2_1tnoa")

@@ -1,0 +1,19 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b0gr0cld6p6bq"]
+
+[ext_resource type="Texture2D" uid="uid://cxs31t88ba8ym" path="res://world/tiles/gray_rock_32.png" id="1_qxcqp"]
+[ext_resource type="Texture2D" uid="uid://dsm4mjmxv1ywl" path="res://world/tiles/Water32x32.png" id="2_38jna"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_38jna"]
+texture = ExtResource("1_qxcqp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ty5nj"]
+texture = ExtResource("2_38jna")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_38jna")
+sources/1 = SubResource("TileSetAtlasSource_ty5nj")

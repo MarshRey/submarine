@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfln4xrdd60v1"]
+
+[ext_resource type="Script" uid="uid://cuxyxlh0og0d7" path="res://ui/check_button.gd" id="1_n3smt"]
+
+[node name="Hud" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
+offset_left = 1079.0
+offset_top = 40.0
+offset_right = 1123.0
+offset_bottom = 64.0
+rotation = 1.5708
+script = ExtResource("1_n3smt")
+
+[node name="DecentVelocity" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 922.0
+offset_top = 95.0
+offset_right = 1154.0
+offset_bottom = 118.0
+text = "Decent Velocity:"
+
+[node name="Velocity" type="Label" parent="CanvasLayer/DecentVelocity"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 2.0
+offset_right = 229.0
+offset_bottom = 25.0
+
+[node name="HorizontalVelocity" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 921.0
+offset_top = 122.0
+offset_right = 1151.0
+offset_bottom = 147.0
+text = "Horizontal Velocity:"
+
+[node name="Velocity" type="Label" parent="CanvasLayer/HorizontalVelocity"]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 3.0
+offset_right = 231.0
+offset_bottom = 26.0
+
+[connection signal="toggled" from="CanvasLayer/CheckButton" to="CanvasLayer/CheckButton" method="_on_toggled"]

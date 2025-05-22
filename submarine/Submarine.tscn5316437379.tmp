@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgxii8cuchue8"]
+
+[ext_resource type="Script" uid="uid://eespn3wkkuf4" path="res://submarine/submarine.gd" id="1_h2q5p"]
+[ext_resource type="Script" uid="uid://dt6ngnt5f4p4s" path="res://submarine/passive_sonar.gd" id="2_w62jf"]
+[ext_resource type="Script" uid="uid://bk4n7tpk8noxr" path="res://submarine/active_sonar.gd" id="3_s87fy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s87fy"]
+size = Vector2(80, 40)
+
+[sub_resource type="GDScript" id="GDScript_s87fy"]
+script/source = "extends Camera2D
+"
+
+[node name="Submarine" type="CharacterBody2D"]
+script = ExtResource("1_h2q5p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="PassiveSonar" type="Node2D" parent="."]
+script = ExtResource("2_w62jf")
+
+[node name="ActiveSonar" type="Node2D" parent="."]
+script = ExtResource("3_s87fy")
+
+[node name="Body" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(80, 40)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s87fy")
+debug_color = Color(0.762829, 0, 0.140152, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
+physics_interpolation_mode = 1
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = SubResource("GDScript_s87fy")

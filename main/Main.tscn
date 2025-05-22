@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dagun2ycokogc"]
+
+[ext_resource type="PackedScene" uid="uid://beaeimtgeiu8h" path="res://world/World.tscn" id="1_5kcm4"]
+[ext_resource type="PackedScene" uid="uid://bfln4xrdd60v1" path="res://ui/HUD.tscn" id="2_cmtxc"]
+[ext_resource type="PackedScene" uid="uid://cgxii8cuchue8" path="res://submarine/Submarine.tscn" id="3_tv7ag"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Submarine" parent="." groups=["submarine"] instance=ExtResource("3_tv7ag")]
+
+[node name="World" parent="." instance=ExtResource("1_5kcm4")]
+
+[node name="Hud" parent="." instance=ExtResource("2_cmtxc")]
